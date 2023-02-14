@@ -62,8 +62,8 @@ func GenerateNewAccessToken(uid string, refreshToken string) (string, error) {
 	tokenString, err := token.SignedString(KEY)
 
 	if err != nil {
-		fmt.Errorf("Something Went Wrong: %s", err.Error())
-		return "", err
+		errorInfo := fmt.Errorf("Something Went Wrong: %s", err.Error())
+		return "", errorInfo
 	}
 	return tokenString, nil
 }
