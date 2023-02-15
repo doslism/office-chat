@@ -100,8 +100,7 @@ func DecodeToken(tokenString string) (types.TokenPayload, error) {
 
 	if claims["tokenType"] == "refresh" || claims["refeshToken"] == nil {
 		res = types.TokenPayload{
-			Uid: claims["uid"].(string),
-			// RefeshToken: claims["refeshToken"].(string),
+			Uid:       claims["uid"].(string),
 			Exp:       claims["exp"].(float64),
 			TokenType: claims["tokenType"].(string),
 		}
