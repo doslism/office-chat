@@ -21,7 +21,7 @@ GenerateNewID is to generate an unique user Id
 */
 func GenerateNewID() string {
 	var randomStr string = uuid.New().String()
-	ts := time.Now().UnixNano()
+	ts := time.Now().UnixMilli()
 	return fmt.Sprintf("%d-%s", ts, randomStr)
 }
 

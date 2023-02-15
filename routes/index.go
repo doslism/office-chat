@@ -17,11 +17,12 @@ func CreateServer() *Server {
 	server := Server{
 		router: router,
 	}
-	server.init()
+
 	return &server
 }
 
 // LisenOnPort is to run the server on a given port
 func (s *Server) LisenOnPort(port int) {
+	s.init()
 	s.router.Run(fmt.Sprintf("0.0.0.0:%d", port))
 }

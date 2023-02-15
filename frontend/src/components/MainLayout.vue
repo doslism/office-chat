@@ -22,8 +22,8 @@
   }
 
   .sider {
-    width: 80px;
-    padding: 16px 20px;
+    width: 60px;
+    padding: 0 16px;
     background: #191919;
   }
 

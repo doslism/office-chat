@@ -4,8 +4,10 @@ Package routes is to config the route
 package routes
 
 import (
+	"doslism/office-chat/types"
+	"doslism/office-chat/utils"
 	"fmt"
-	"time"
+	"log"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -13,18 +15,24 @@ import (
 
 func (s *Server) init() {
 	fmt.Println("init")
-	s.router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:4900"},
-		AllowMethods:     []string{"PUT", "PATCH", "GET", "POST", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: false,
-		MaxAge:           12 * time.Hour,
-	}))
+	s.router.Use(cors.Default())
 
 	// todo: user register
-	s.router.POST("/users/new", func(ctx *gin.Context) {
-		fmt.Println(ctx)
+	s.router.POST("/", func(ctx *gin.Context) {
+		var body types.RegisterData
+		err := ctx.BindJSON(&body)
+		if err != nil {
+			log.Fatalln("Failed to parse")
+			return
+		}
+		uid := utils.GenerateNewID()
+		fmt.Printf("username: %s \n", body.Username)
+		fmt.Printf("password: %s \n", body.Password)
+		fmt.Printf("uid: %s \n", uid)
+	})
+	s.router.GET("/", func(ctx *gin.Context) {
+		fmt.Println(ctx.Request.Host)
+		fmt.Println(2)
 	})
 
 	// todo: user login
